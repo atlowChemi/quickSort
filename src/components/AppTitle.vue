@@ -19,5 +19,6 @@ export default component;
 <style lang="scss" scoped>
 h1 {
     color: $primary;
+    text-align: center;
 }
 </style>
