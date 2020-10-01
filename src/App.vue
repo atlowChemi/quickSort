@@ -1,6 +1,6 @@
 <template>
     <AppTitle title="Quick sort animator" />
-    <InsertArray />
+    <InsertArray @new-array="recievedNewArray($event)" />
 </template>
 
 <script lang="ts">
@@ -10,6 +10,12 @@ import InsertArray from "./components/InsertArray.vue";
 
 const component = defineComponent({
     components: { AppTitle, InsertArray },
+    setup() {
+        function recievedNewArray(e: number[]) {
+            console.log(e);
+        }
+        return { recievedNewArray };
+    }
 });
 
 export default component;
@@ -21,7 +27,6 @@ export default component;
 }
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
-    text-align: center;
     color: #2c3e50;
     margin-top: 2.4rem;
 }
