@@ -1,26 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <AppTitle title="Quick sort animator" />
+    <InsertArray />
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { defineComponent } from "vue";
+import AppTitle from "./components/AppTitle.vue";
+import InsertArray from "./components/InsertArray.vue";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+const component = defineComponent({
+    components: { AppTitle, InsertArray },
+});
+
+export default component;
 </script>
 
-<style>
+<style lang="scss">
+* {
+    box-sizing: border-box;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 2.4rem;
 }
 </style>
