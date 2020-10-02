@@ -7,7 +7,7 @@ export const validateNo52: ValidationFn = txt =>
 
 export const validateLessThanMaxCells: ValidationFn = txt => {
 	let tmp = txt.match(/\d+/g);
-	if (tmp?.length == null || tmp.length >= 25) return errorTypes.validateLessThanMaxCells;
+	if (tmp?.length == null || tmp.length > 25) return errorTypes.validateLessThanMaxCells;
 	return tmp.map(i => Number(i));
 }
 
