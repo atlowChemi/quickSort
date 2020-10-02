@@ -1,15 +1,15 @@
 <template>
     <AppTitle title="Quick sort animator" />
     <InsertArray @new-array="recievedNewArray($event)" />
+    <MyHr />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AppTitle from "./components/AppTitle.vue";
-import InsertArray from "./components/InsertArray.vue";
+import { AppTitle, InsertArray, MyHr } from "./components";
 
 const component = defineComponent({
-    components: { AppTitle, InsertArray },
+    components: { AppTitle, InsertArray, MyHr },
     setup() {
         function recievedNewArray(e: number[]) {
             console.log(e);
@@ -27,7 +27,7 @@ export default component;
 }
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
-    color: #2c3e50;
+    color: $mainDark;
     margin-top: 2.4rem;
 }
 </style>
