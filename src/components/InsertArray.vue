@@ -68,11 +68,11 @@ button {
     border: 2px solid $secondary;
     border-radius: 0.3rem;
     background: $primary;
-    color: white;
+    color: $mainLight;
     font-size: 1rem;
     padding: 0.7rem 1rem;
     margin: 0.3rem auto;
-    text-shadow: 0 0 3px black;
+    text-shadow: 0 0 3px $mainDark;
     transition: all 400ms linear;
     &:active, &:hover, &:focus {
         border-color: $primary;
