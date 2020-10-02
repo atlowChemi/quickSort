@@ -5,16 +5,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { AppTitle, InsertArray, MyHr } from "./components";
 
 const component = defineComponent({
     components: { AppTitle, InsertArray, MyHr },
     setup() {
+        const arrToSort = ref<number[]>([]);
         function recievedNewArray(e: number[]) {
-            console.log(e);
+            arrToSort.value.length = 0;
+            arrToSort.value = e;
         }
-        return { recievedNewArray };
+        return { arrToSort, recievedNewArray };
     }
 });
 
