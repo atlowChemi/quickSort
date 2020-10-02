@@ -2,14 +2,15 @@
     <AppTitle title="Quick sort animator" />
     <InsertArray @new-array="recievedNewArray($event)" />
     <MyHr />
+    <ArraySorter v-if="arrToSort?.length" :arr="arrToSort" />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { AppTitle, InsertArray, MyHr } from "./components";
+import { AppTitle, ArraySorter, InsertArray, MyHr } from "./components";
 
 const component = defineComponent({
-    components: { AppTitle, InsertArray, MyHr },
+    components: { AppTitle, ArraySorter, InsertArray, MyHr },
     setup() {
         const arrToSort = ref<number[]>([]);
         function recievedNewArray(e: number[]) {
