@@ -1,34 +1,53 @@
 <template>
-    <label :class="{error: validity === false}">
+    <label :class="{ error: err }">
         Add space seperated numbers to sort:
         <input type="text" name="arrayInsert" v-model.trim="text" />
+        <span class="err" v-if="err">{{ err }}</span>
     </label>
     <button @click="submitData">Animate sort</button>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref } from "vue";
+import {
+    validateFormat,
+    validateNo52,
+    validateLessThanMaxCells,
+} from "../utils/validators";
 
 const component = defineComponent({
-    emits:{ 'new-array': null },
+    emits: { "new-array": null },
     setup(_, { emit }) {
-        const text = ref('');
-        const validity = ref<boolean>();
-        function validateText() {
-            return /^(\d+\s{0,1})+$/.test(text.value);
-        }
+        const text = ref("");
+        const err = ref("");
         function submitData() {
-            const isValid = validateText();
-            validity.value = isValid;
-            const data = text.value.split(" ").map(i => Number(i));
-            if(isValid) emit("new-array", data);
+            let validatorFn: boolean | string | number[];
+            err.value = "";
+            if (
+                typeof (validatorFn = validateFormat(text.value)) === "string"
+            ) {
+                err.value = validatorFn;
+                return;
+            }
+            if (typeof (validatorFn = validateNo52(text.value)) === "string") {
+                err.value = validatorFn;
+                return;
+            }
+            if (
+                typeof (validatorFn = validateLessThanMaxCells(text.value)) ===
+                "string"
+            ) {
+                err.value = validatorFn;
+                return;
+            }
+            if (validatorFn instanceof Array) emit("new-array", validatorFn);
         }
         return {
             text,
-            validity,
+            err,
             submitData,
-        }
-    }
+        };
+    },
 });
 
 export default component;
@@ -36,10 +55,12 @@ export default component;
 
 <style lang="scss" scoped>
 label {
+    font-size: 1.4rem;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
-    font-size: 1.4rem;
+    text-align: center;
     input {
         outline: none;
         border: 2px solid $primary;
@@ -52,6 +73,9 @@ label {
         &:focus {
             border-color: $secondary;
         }
+    }
+    span.err {
+        width: 100%;
     }
     &.error {
         color: $errPrimary;
@@ -75,7 +99,9 @@ button {
     margin: 0.3rem auto;
     text-shadow: 0 0 3px $mainDark;
     transition: all 400ms linear;
-    &:active, &:hover, &:focus {
+    &:active,
+    &:hover,
+    &:focus {
         border-color: $primary;
         background: $secondary;
     }
