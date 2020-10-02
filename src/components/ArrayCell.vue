@@ -24,8 +24,9 @@ export default component;
     height: 3.5rem;
     background: $mainDark;
     color: $mainLight;
-    border: 2px solid $primary;
-    border-radius: 0.4rem;
+    border: 1px solid $secondary;
+    border-top-width: 0.2rem;
+    border-bottom-width: 0.2rem;
     align-items: center;
     justify-content: center;
 }

@@ -1,5 +1,7 @@
 <template>
-    <ArrayCell v-for="(item, ind) of arr" :key="ind" :item="item" />
+    <div class="cellParent">
+        <ArrayCell v-for="(item, ind) of arr" :key="ind" :item="item" />
+    </div>
 </template>
 
 <script lang="ts">
@@ -19,3 +21,21 @@ const component = defineComponent({
 
 export default component;
 </script>
+
+<style lang="scss" scoped>
+.cellParent {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    .cell {
+        &:first-of-type {
+            border-radius: 0.6rem 0 0 0.6rem;
+            border-left-width: 0.2rem;
+        }
+        &:last-of-type {
+            border-radius: 0 0.6rem 0.6rem 0;
+            border-right-width: 0.2rem;
+        }
+    }
+}
+</style>
