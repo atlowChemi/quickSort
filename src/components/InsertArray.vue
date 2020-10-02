@@ -20,7 +20,8 @@ const component = defineComponent({
         function submitData() {
             const isValid = validateText();
             validity.value = isValid;
-            if(isValid) emit("new-array", text.value.split(" "));
+            const data = text.value.split(" ").map(i => Number(i));
+            if(isValid) emit("new-array", data);
         }
         return {
             text,
