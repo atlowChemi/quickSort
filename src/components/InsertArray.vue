@@ -1,10 +1,12 @@
 <template>
-    <label :class="{ error: err }">
-        Add space seperated numbers to sort:
-        <input type="text" name="arrayInsert" v-model.trim="text" />
-        <span class="err" v-if="err">{{ err }}</span>
-    </label>
-    <button @click="submitData">Animate sort</button>
+    <form @submit.prevent="submitData">
+        <label :class="{ error: err }">
+            Add space seperated numbers to sort:
+            <input type="text" name="arrayInsert" v-model.trim="text" />
+            <span class="err" v-if="err">{{ err }}</span>
+        </label>
+        <button type="submit" :disabled="sortData.state !== 'available'">Animate sort</button>
+    </form>
 </template>
 
 <script lang="ts">
@@ -14,7 +16,7 @@ import {
     validateNo52,
     validateLessThanMaxCells,
 } from "../utils/validators";
-import { setArrVal } from "../utils/shared";
+import { setArrVal, sortData } from "../utils/shared";
 
 const component = defineComponent({
     setup() {
@@ -46,6 +48,7 @@ const component = defineComponent({
             text,
             err,
             submitData,
+            sortData,
         };
     },
 });
@@ -104,6 +107,11 @@ button {
     &:focus {
         border-color: $primary;
         background: $secondary;
+    }
+    &:disabled {
+        color: $mainDark;
+        background: rgba($color: $mainDark, $alpha: 0.7);
+        cursor: not-allowed;
     }
 }
 </style>
