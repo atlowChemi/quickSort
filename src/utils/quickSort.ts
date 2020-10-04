@@ -1,8 +1,7 @@
-import { ref, watch } from "vue";
 import { setRefs, setWorkArea, sortData } from "./shared";
 
 function sleep() {
-	return new Promise<void>(res => setTimeout(res, 2250));
+	return new Promise<void>(res => setTimeout(res, 1250));
 }
 
 function swap<T>(arr: T[], i: number, j: number) {
@@ -14,39 +13,34 @@ function swap<T>(arr: T[], i: number, j: number) {
 	let tmp = arr[i];
 	arr.splice(i, 1, arr[j]);
 	arr.splice(j, 1, tmp);
-	// arr[i] = arr[j];
-	// arr[j] = tmp;
 }
 
 async function partition<T>(arr: T[], leftIndex: number, rightIndex: number) {
-	console.log(`work from ${leftIndex} till ${rightIndex}`);
-	setWorkArea({ start: leftIndex, end: rightIndex });
 	//Set pivot to middle element
 	let pivotInd = Math.floor((rightIndex + leftIndex) / 2);
 	let pivot = arr[pivotInd];
+	setWorkArea({ start: leftIndex, end: rightIndex });
 	setRefs({ pivotRef: pivotInd, leftRef: leftIndex, rightRef: rightIndex });
 	//Start itterating as long as we didn't set the pivot location.
 	while (sortData.refs.leftRef! <= sortData.refs.rightRef!) {
 		//Iterrate till we find the pivot's location from left, and reset the left index every time.
-		while (arr[sortData.refs.leftRef!] < pivot) sortData.refs.leftRef!++;
+		while (arr[sortData.refs.leftRef!] < pivot) setRefs({ leftRef:  sortData.refs.leftRef! + 1 });
 		//Iterrate till we find the pivot's location from right, and reset the right index every time.
-		while (arr[sortData.refs.rightRef!] > pivot) sortData.refs.rightRef!--;
+		while (arr[sortData.refs.rightRef!] > pivot) setRefs({ rightRef:  sortData.refs.rightRef! - 1 });
 		//If we need to - change the pivot's location
 		if (sortData.refs.leftRef! <= sortData.refs.rightRef!) {
 			await sleep();
 			swap(arr, sortData.refs.leftRef!, sortData.refs.rightRef!);
-			sortData.refs.leftRef!++;
-			sortData.refs.rightRef!--;
+			setRefs({ leftRef:  sortData.refs.leftRef! + 1, rightRef: sortData.refs.rightRef! - 1 });
 		}
 	}
 	return sortData.refs.leftRef!;
 }
 
 async function quickSort() {
-
 	await quickSortInner(sortData.arr, 0, sortData.length - 1);
 	setWorkArea({ start: undefined, end: undefined });
-	setRefs({ pivotRef: undefined, leftRef: undefined, rightRef: undefined });
+	setRefs({}, false);
 }
 
 async function quickSortInner(
