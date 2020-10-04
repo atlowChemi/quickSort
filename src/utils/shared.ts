@@ -10,6 +10,7 @@ type Refs = {
 	leftRef: number | undefined;
 };
 type RelevantSortData = {
+	state: "sorting" | "available";
 	arr: number[];
 	length: number;
 	workArea: WorkArea;
@@ -17,6 +18,7 @@ type RelevantSortData = {
 };
 
 export const sortData = reactive<RelevantSortData>({
+	state: "available",
 	arr: [],
 	length: 0,
 	workArea: { start: undefined, end: undefined },

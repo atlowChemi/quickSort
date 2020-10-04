@@ -38,9 +38,11 @@ async function partition<T>(arr: T[], leftIndex: number, rightIndex: number) {
 }
 
 async function quickSort() {
+	sortData.state = "sorting";
 	await quickSortInner(sortData.arr, 0, sortData.length - 1);
 	setWorkArea({ start: undefined, end: undefined });
 	setRefs({}, false);
+	sortData.state = "available";
 }
 
 async function quickSortInner(
