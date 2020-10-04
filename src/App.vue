@@ -7,11 +7,11 @@
 
 <script lang="ts">
 import { defineComponent, } from "vue";
-import { AppTitle, ArraySorter, InsertArray, MyHr } from "./components";
+import { AppTitle, ArraySorter, InsertArray } from "./components";
 import { sortData } from "./utils/shared";
 
 const component = defineComponent({
-    components: { AppTitle, ArraySorter, InsertArray, MyHr },
+    components: { AppTitle, ArraySorter, InsertArray },
     setup() {
         return { sortData };
     },

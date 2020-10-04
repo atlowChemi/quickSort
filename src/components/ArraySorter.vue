@@ -24,12 +24,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ArrayCell, ArrayPointer, MyHr } from ".";
+import { ArrayCell, ArrayPointer } from ".";
 import { quickSort } from "../utils/quickSort";
 import { sortData } from "../utils/shared";
 
 const component = defineComponent({
-    components: { ArrayCell, ArrayPointer, MyHr },
+    components: { ArrayCell, ArrayPointer },
     setup() {
         return { sortData, quickSort };
     },
