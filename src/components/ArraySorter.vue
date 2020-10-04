@@ -1,4 +1,6 @@
 <template>
+    <h3>Click on array to sort it.</h3>
+    <MyHr />
     <ArrayPointer type="Location" />
     <div class="cellParent" @click="quickSort">
         <ArrayCell
@@ -22,12 +24,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ArrayCell, ArrayPointer } from ".";
+import { ArrayCell, ArrayPointer, MyHr } from ".";
 import { quickSort } from "../utils/quickSort";
 import { sortData } from "../utils/shared";
 
 const component = defineComponent({
-    components: { ArrayCell, ArrayPointer },
+    components: { ArrayCell, ArrayPointer, MyHr },
     setup() {
         return { sortData, quickSort };
     },
@@ -37,6 +39,10 @@ export default component;
 </script>
 
 <style lang="scss" scoped>
+h3 {
+    text-align: center;
+    font-size: 1.4rem;
+}
 .cellParent {
     margin-top: 4rem;
     display: flex;
