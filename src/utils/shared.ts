@@ -1,4 +1,4 @@
-import { reactive, ref, Ref } from "vue";
+import { reactive } from "vue";
 
 type WorkArea = {
 	start: number | undefined;
@@ -14,14 +14,14 @@ type RelevantSortData = {
 	length: number;
 	workArea: WorkArea;
 	refs: Refs;
-}
+};
 
 export const sortData = reactive<RelevantSortData>({
 	arr: [],
 	length: 0,
 	workArea: { start: undefined, end: undefined },
-	refs: { pivotRef: undefined, leftRef: undefined, rightRef: undefined }
-})
+	refs: { pivotRef: undefined, leftRef: undefined, rightRef: undefined },
+});
 
 export const setArrVal = (newVal: number[]) => {
 	sortData.arr = newVal;
@@ -30,6 +30,15 @@ export const setArrVal = (newVal: number[]) => {
 	setRefs({ pivotRef: undefined, leftRef: undefined, rightRef: undefined });
 };
 
-export const setWorkArea = (area: WorkArea) => sortData.workArea = area;
+export const setWorkArea = (area: WorkArea) => (sortData.workArea = area);
 
-export const setRefs = (refs: Refs) => sortData.refs = refs;
+export const setRefs = (refs: Partial<Refs>, isPartial: boolean = true) => {
+	const { pivotRef: prevPivot, rightRef: prevRight, leftRef: prevLeft } = sortData.refs;
+	let { pivotRef, leftRef, rightRef } = refs;
+	if (isPartial) {
+		if (pivotRef == null) pivotRef = prevPivot;
+		if (leftRef == null) leftRef = prevLeft;
+		if (rightRef == null) rightRef = prevRight;
+	}
+	sortData.refs = { pivotRef, leftRef, rightRef };
+};
