@@ -1,5 +1,5 @@
 <template>
-    <div class="cell">{{ item }}</div>
+    <div class="cell" :class="{ selected: isSelected }">{{ item }}</div>
 </template>
 
 <script lang="ts">
@@ -16,6 +16,10 @@ const component = defineComponent({
             default: false,
         },
         isIndex: {
+            type: Boolean,
+            default: false,
+        },
+        isSelected: {
             type: Boolean,
             default: false,
         },
@@ -39,5 +43,9 @@ export default component;
     justify-content: center;
     position: relative;
     transition: all 450ms linear;
+    &.selected {
+        top: -1rem;
+        background-color: $primary;
+    }
 }
 </style>

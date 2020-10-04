@@ -14,10 +14,10 @@ import {
     validateNo52,
     validateLessThanMaxCells,
 } from "../utils/validators";
+import { setArrVal } from "../utils/shared";
 
 const component = defineComponent({
-    emits: { "new-array": null },
-    setup(_, { emit }) {
+    setup() {
         const text = ref("");
         const err = ref("");
         function submitData() {
@@ -40,7 +40,7 @@ const component = defineComponent({
                 err.value = validatorFn;
                 return;
             }
-            if (validatorFn instanceof Array) emit("new-array", validatorFn);
+            if (validatorFn instanceof Array) setArrVal(validatorFn);
         }
         return {
             text,

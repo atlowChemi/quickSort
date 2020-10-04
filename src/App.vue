@@ -1,24 +1,20 @@
 <template>
     <AppTitle title="Quick sort animator" />
-    <InsertArray @new-array="recievedNewArray($event)" />
+    <InsertArray />
     <MyHr />
-    <ArraySorter v-if="arrToSort?.length" :arr="arrToSort" />
+    <ArraySorter v-if="sortData.length" />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, } from "vue";
 import { AppTitle, ArraySorter, InsertArray, MyHr } from "./components";
+import { sortData } from "./utils/shared";
 
 const component = defineComponent({
     components: { AppTitle, ArraySorter, InsertArray, MyHr },
     setup() {
-        const arrToSort = ref<number[]>([]);
-        function recievedNewArray(e: number[]) {
-            arrToSort.value.length = 0;
-            arrToSort.value = e;
-        }
-        return { arrToSort, recievedNewArray };
-    }
+        return { sortData };
+    },
 });
 
 export default component;

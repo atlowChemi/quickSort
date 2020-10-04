@@ -1,22 +1,36 @@
 <template>
-    <div class="cellParent">
-        <ArrayCell v-for="(item, ind) of arr" :key="ind" :item="item" />
+    <ArrayPointer type="Location" />
+    <div class="cellParent" @click="quickSort">
+        <ArrayCell
+            v-for="(item, ind) of sortData.arr"
+            :key="ind"
+            :item="item"
+            :is-selected="
+                sortData.workArea.start != null &&
+                sortData.workArea.end != null &&
+                ind >= sortData.workArea.start &&
+                ind <= sortData.workArea.end
+            "
+            :is-pivot="sortData.refs.pivotRef === ind"
+            :is-index="
+                sortData.refs.rightRef === ind || sortData.refs.leftRef === ind
+            "
+        />
     </div>
+    <ArrayPointer type="Pivot" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ArrayCell } from ".";
+import { ArrayCell, ArrayPointer } from ".";
+import { quickSort } from "../utils/quickSort";
+import { sortData } from "../utils/shared";
 
 const component = defineComponent({
-    props: {
-        arr: {
-            type: Array as () => number[],
-            default: [],
-            reqired: true,
-        },
+    components: { ArrayCell, ArrayPointer },
+    setup() {
+        return { sortData, quickSort };
     },
-    components: { ArrayCell },
 });
 
 export default component;
@@ -24,16 +38,19 @@ export default component;
 
 <style lang="scss" scoped>
 .cellParent {
+    margin-top: 4rem;
     display: flex;
     justify-content: center;
     flex-wrap: nowrap;
     .cell {
         &:first-of-type {
-            border-radius: 0.6rem 0 0 0.6rem;
+            border-bottom-left-radius: 0.6rem;
+            border-top-left-radius: 0.6rem;
             border-left-width: 0.2rem;
         }
         &:last-of-type {
-            border-radius: 0 0.6rem 0.6rem 0;
+            border-top-right-radius: 0.6rem;
+            border-bottom-right-radius: 0.6rem;
             border-right-width: 0.2rem;
         }
     }
