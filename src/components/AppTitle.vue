@@ -1,7 +1,5 @@
 <template>
-    <div class="hello">
-        <h1>{{ title }}</h1>
-    </div>
+    <h1>{{ title }}</h1>
 </template>
 
 <script lang="ts">
@@ -11,7 +9,6 @@ const component = defineComponent({
     props: {
         title: { required: true, type: String },
     },
-    // setup(props) {}
 });
 export default component;
 </script>
