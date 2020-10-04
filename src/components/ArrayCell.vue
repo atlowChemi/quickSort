@@ -11,6 +11,14 @@ const component = defineComponent({
             required: true,
             type: Number,
         },
+        isPivot: {
+            type: Boolean,
+            default: false,
+        },
+        isIndex: {
+            type: Boolean,
+            default: false,
+        },
     },
 });
 
@@ -29,5 +37,7 @@ export default component;
     border-bottom-width: 0.2rem;
     align-items: center;
     justify-content: center;
+    position: relative;
+    transition: all 450ms linear;
 }
 </style>
