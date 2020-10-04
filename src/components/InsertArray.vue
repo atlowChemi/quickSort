@@ -23,6 +23,7 @@ const component = defineComponent({
         const text = ref("");
         const err = ref("");
         function submitData() {
+            if (sortData.state === "sorting") return;
             let validatorFn: boolean | string | number[];
             err.value = "";
             if (
