@@ -1,4 +1,7 @@
-# quick_sort
+# Quick Sort
+
+## Description
+This project will accept space seperated numbers from user, and will sort the numbers with visualization, using the quick sort method.
 
 ## Project setup
 ```
