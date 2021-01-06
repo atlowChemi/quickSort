@@ -1,7 +1,12 @@
-# Quick Sort
+# Quick Sort Visualizer 🧙🏾‍♂️
+
+## Check it out
+Check the visualizer [here](https://chemiatlow.github.io/quickSort).
 
 ## Description
-This project will accept space seperated numbers from user, and will sort the numbers with visualization, using the quick sort method.
+A visualization of the quick sort algorithm.
+This project accepts an input from the user - space seperated numbers.
+The inputed numbers are turned to an array, which will be sorted with visualization, using the quick sort method.
 
 ## Project setup
 ```
